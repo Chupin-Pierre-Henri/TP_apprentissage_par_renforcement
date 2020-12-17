@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-
+import torch.nn.functional as f
 
 
 class QNetwork(nn.Module):
@@ -11,11 +11,11 @@ class QNetwork(nn.Module):
     seed (int): un seed random
     fc_unit (int): Number of nodes in first hidden layer
     """
-    def __init__(self, dimension_etat, dimension_action, seed, fc_unit=64):
+    def __init__(self, dimension_etat, dimension_action, seed, fc_unit=32):
         super(QNetwork, self).__init__()
         self.seed = torch.manual_seed(seed)
-        self.fc = nn.Linear(state_size, fc_unit)
-        self.fc_end = nn.Linear(fc_unit,action_size)
+        self.fc = nn.Linear(dimension_etat, fc_unit)
+        self.fc_end = nn.Linear(fc_unit,dimension_action)
 
 
     def forward(self, x):
