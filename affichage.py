@@ -4,21 +4,21 @@ import matplotlib.pyplot as plt
 class Affichage():
     
     def __init__(self) -> None:
-        self.rewards = []
+        self.recompense = []
 
     def start_episode(self):
         self.c = 0
         self.r_sum = 0
 
-    def add_value(self, reward):
+    def add_value(self, recompense):
         self.c += 1
-        self.r_sum += reward
+        self.r_sum += recompense
 
     def recorde_episode(self):
-        self.rewards.append(self.r_sum)
+        self.recompense.append(self.r_sum)
 
     def show(self):
-        plt.plot(self.rewards)
-        plt.ylabel('rewards par episode')
+        plt.plot(self.recompense)
+        plt.ylabel('recompense par episode')
         plt.xlabel('episodes')
         plt.show()

@@ -12,10 +12,10 @@ if __name__ == "__main__":
     logger.set_level(logger.INFO)
 
     env = gym.make('CartPole-v1')
-    outdir = 'log/cart_pole-agent-results'
+    outdir = 'log/random-agent-results'
     #env = wrappers.Monitor(env, directory=outdir, force=True)
     env.seed(0)
-    agent = CartPoleAgent(env)
+    agent = CartPoleAgent(env, 0.01, 500, 0.005, True)
     BUFFER_SIZE = 50000
     episode_count = 600
     reward = 0
@@ -46,9 +46,9 @@ if __name__ == "__main__":
                 env.render()
             step += 1
             if end:
-                # if i % 25 == 0:
+                # if i % 100 == 0:
+                print('episode {} done took {} steps '.format(i, step))
                 reword_recorder.recorde_episode()
-                print('episode {} reward {} '.format(i, reword_recorder.recompense[-1]))
                 break
     env.close()
     agent.save_param()

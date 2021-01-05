@@ -19,7 +19,7 @@ if __name__ == "__main__":
     env = gym.make('VizdoomBasic-v0', depth=True, labels=True, position=True, health=True)
     outdir = 'log/viz_doom-agent-results'
     #env = wrappers.Monitor(env, directory=outdir, force=True)
-    agent = VizDoomAgent(env)
+    agent = VizDoomAgent(env, 0.01, 500, 0.005, True)
     episode_count = 500
     reward = 0
     done = False

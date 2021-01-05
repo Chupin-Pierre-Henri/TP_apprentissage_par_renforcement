@@ -1,3 +1,4 @@
+import gym
 from Agent import Agent
 from ConvuNeuronne import CnnModel
 import torch
@@ -11,12 +12,12 @@ import numpy as np
 
 class VizDoomAgent(Agent):
     
-    def __init__(self, env, alpha=0.01, u_c=500, lr=5e-4, res=(112, 64, 3), from_file=False):
+    def __init__(self, env: gym.Env, alpha=0.01, u_c=500, eps=1.0, lr=0.005, res=(42, 24, 3), from_file=False): # (112, 64, 3) (28, 16, 3)
         super().__init__(env, alpha, u_c, lr)
         self.resolution = res
 
-        self.r_Neurones = CnnModel()
-        self.reseau_cible = CnnModel()
+        self.r_Neurones = CnnModel(res[0], res[1], self.espace_action.n)
+        self.reseau_cible = CnnModel(res[0], res[1], self.espace_action.n)
 
         if from_file:
             self.r_Neurones.load_state_dict(torch.load("saved_params/vizdoom.pt"))
